@@ -1,17 +1,17 @@
 #include <SD.h>
 #include <Wire.h>
-//#include "MMA7660.h"
+#include "MMA7660.h"
 #include <SoftwareSerial.h>
 #define COUNT_OF_LATITUDE 3
 #define COUNT_OF_LONGITUDE 5
 #define COUNT_OF_TIME  1
-//MMA7660 acc;
+MMA7660 acc;
 
 SoftwareSerial ss(3,2);
 
 void setup()
 {
-//    acc.init();
+    acc.init();
     pinMode(13, OUTPUT);
     Serial.begin(38400);
     ss.begin(38400);
@@ -29,7 +29,7 @@ void loop()
     int count=0;
 
     
-//    acc.getAcceleration(&ax,&ay,&az);
+    acc.getAcceleration(&ax,&ay,&az);
     while(ss.available())
     {    
         temp = ss.read();
@@ -45,26 +45,41 @@ void loop()
             }
             break;
         }
+        if(count==1&&StringMass[0]!="$GPRMC"){
+            for(int i=0; i<2;i++){
+                StringMass[i]="";
+            }
+            while(dataString!="$GPRMC"){
+                temp = ss.read();
+                if(temp==','){
+                    StringMass[count]=dataString;
+                    temp=0;
+                    dataString="";
+                    count++;
+                }   
+                dataString += String(temp);
+            }
+        }
         dataString += String(temp);
         index++;
         if(index>600){
         break;
       }
     }
-    Serial.println("Longitude: ");
-    Serial.println(StringMass[COUNT_OF_LONGITUDE]);
-    Serial.println("Latitude: ");
-    Serial.println(StringMass[COUNT_OF_LATITUDE]);
-    Serial.println("Time: ");
+    Serial.println("|");
     Serial.println(StringMass[COUNT_OF_TIME]);
-    
-   /* Serial.print("accleration: ");
+    Serial.println("|");
+    Serial.println(StringMass[COUNT_OF_LONGITUDE]);
+    Serial.println("|");
+    Serial.println(StringMass[COUNT_OF_LATITUDE]);
+    Serial.println("|");
     Serial.print(ax);
+    Serial.println("|");
     Serial.print(ay);
+    Serial.println("|");
     Serial.print(az);
-    Serial.println();
-    delay(50);*/
-
+    Serial.println("|");
+    delay(100);
 }
 
 

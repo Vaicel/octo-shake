@@ -8,6 +8,7 @@
 MMA7660 acc;
 
 SoftwareSerial ss(3,2);
+String StringMass[12];
 
 void setup()
 {
@@ -25,7 +26,6 @@ void loop()
     char index = 0;
     char temp = 0;
     String dataString = "";
-    String StringMass[12];
     int count=0;
 
     
@@ -40,9 +40,6 @@ void loop()
             count++;   
         }
         if(StringMass[2]=="V"){
-            for(int i=0; i<13;i++){
-                StringMass[i]="-";
-            }
             break;
         }
         if(count==1&&StringMass[0]!="$GPRMC"){
@@ -66,18 +63,14 @@ void loop()
                 break;
             }
         }
-   /* if(StringMass[COUNT_OF_TIME]){
-        Serial.println(StringMass[COUNT_OF_TIME]);
-        Serial.println(",");
-    }*/
-    if(StringMass[COUNT_OF_LATITUDE]){
-        Serial.print(StringMass[COUNT_OF_LONGITUDE]);
-        Serial.print(",");
-    }
-    if(StringMass[COUNT_OF_LONGITUDE]){
-        Serial.print(StringMass[COUNT_OF_LATITUDE]);
-        Serial.print(",");
-        }
+
+    Serial.print(StringMass[COUNT_OF_TIME]);
+    Serial.print(",");
+    Serial.print(StringMass[COUNT_OF_LONGITUDE]);
+    Serial.print(",");
+    Serial.print(StringMass[COUNT_OF_LATITUDE]);
+    Serial.print(",");
+
 /*    Serial.println(dataString);
     Serial.println(",");*/
     Serial.print(ax);

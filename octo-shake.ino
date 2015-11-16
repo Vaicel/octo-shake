@@ -59,27 +59,33 @@ void loop()
                 }   
                 dataString += String(temp);
             }
+            }
+            dataString += String(temp);
+            index++;
+            if(index>600){
+                break;
+            }
         }
-        dataString += String(temp);
-        index++;
-        if(index>600){
-        break;
-      }
+   /* if(StringMass[COUNT_OF_TIME]){
+        Serial.println(StringMass[COUNT_OF_TIME]);
+        Serial.println(",");
+    }*/
+    if(StringMass[COUNT_OF_LATITUDE]){
+        Serial.print(StringMass[COUNT_OF_LONGITUDE]);
+        Serial.print(",");
     }
-    Serial.println("|");
-    Serial.println(StringMass[COUNT_OF_TIME]);
-    Serial.println("|");
-    Serial.println(StringMass[COUNT_OF_LONGITUDE]);
-    Serial.println("|");
-    Serial.println(StringMass[COUNT_OF_LATITUDE]);
-    Serial.println("|");
+    if(StringMass[COUNT_OF_LONGITUDE]){
+        Serial.print(StringMass[COUNT_OF_LATITUDE]);
+        Serial.print(",");
+        }
+/*    Serial.println(dataString);
+    Serial.println(",");*/
     Serial.print(ax);
-    Serial.println("|");
+    Serial.print(",");
     Serial.print(ay);
-    Serial.println("|");
-    Serial.print(az);
-    Serial.println("|");
+    Serial.print(",");
+    Serial.println(az);
     delay(100);
-}
+    }
 
 

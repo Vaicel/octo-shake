@@ -33,7 +33,7 @@ void loop()
 
     
     acc.getAcceleration(&ax,&ay,&az);
-    File dataFile = SD.open("datalog.txt", FILE_WRITE);
+    File dataFile = SD.open("data.csv", FILE_WRITE);
     if(dataFile)
     {
         while(ss.available())

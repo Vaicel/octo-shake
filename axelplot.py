@@ -7,12 +7,11 @@ import csv
 
 Y = []
 
-filename = 'data.csv'
+filename = "DATALOG.TXT"
 
-with open(filename, 'rb') as csvfile:
-	filereader = csv.reader(csvfile, delimiter=',')
-	for row in filereader:
-		Y.append(map(float,row))
+for line in open(filename):
+	line = line.split(',')
+	Y.append(map(float,line))
 
 Y = np.array(Y)
 x = np.arange(len(Y))

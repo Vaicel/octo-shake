@@ -17,6 +17,8 @@ void setup()
     Serial.begin(38400);
     ss.begin(38400);
     pinMode(10, OUTPUT);
+    pinMode(4, OUTPUT);
+    pinMode(5, OUTPUT);
     if (!SD.begin(chipSelect)) {
       return;
   }
@@ -46,6 +48,9 @@ void loop()
                 count++;   
             }
             if(StringMass[2]=="V"){
+                digitalWrite(4, HIGH);
+                delay(400);
+                digitalWrite(4,LOW);
                 break;
             }
             if(count==1&&StringMass[0]!="$GPRMC"){
@@ -69,19 +74,25 @@ void loop()
                 break;
             }
         }
-    dataFile.print(StringMass[COUNT_OF_TIME]);
-    dataFile.print(",");
-    dataFile.print(StringMass[COUNT_OF_LONGITUDE]);
-    dataFile.print(",");
-    dataFile.print(StringMass[COUNT_OF_LATITUDE]);
-    dataFile.print(",");
-    dataFile.print(ax);
-    dataFile.print(",");
-    dataFile.print(ay);
-    dataFile.print(",");
-    dataFile.println(az);
-    dataFile.close();
-    delay(100);
+        if(StringMass[COUNT_OF_TIME]&&StringMass[COUNT_OF_LONGITUDE]&&StringMass[COUNT_OF_LATITUDE]){
+                digitalWrite(5, HIGH);
+                delay(400);
+                digitalWrite(5,LOW);
+        }
+        
+        dataFile.print(StringMass[COUNT_OF_TIME]);
+        dataFile.print(",");
+        dataFile.print(StringMass[COUNT_OF_LONGITUDE]);
+        dataFile.print(",");
+        dataFile.print(S21tringMass[COUNT_OF_LATITUDE]);
+        dataFile.print(",");
+        dataFile.print(ax);
+        dataFile.print(",");
+        dataFile.print(ay);
+        dataFile.print(",");
+        dataFile.println(az);
+        dataFile.close();
+        delay(100);
     }
 
 }

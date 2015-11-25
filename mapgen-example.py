@@ -12,12 +12,13 @@ Y = []
 Z = []
 
 # исходный файл с данными по GPS и акселерометру
-filename = "DATALOG.TXT"
+filename = 'DATA.csv'
 
 # читаем в файл и склазываем в массив
-for line in open(filename):
-	line = line.split(',')
-	Y.append(map(float,line))
+with open(filename, 'rb') as csvfile:
+	filereader = csv.reader(csvfile, delimiter=',')
+	for row in filereader:
+		Y.append(map(float,row))
 
 # делаем из питоновского массива нумпаевский массив
 Y = np.array(Y)

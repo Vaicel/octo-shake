@@ -18,7 +18,7 @@ filename = 'DATA.csv'
 with open(filename, 'rb') as csvfile:
 	filereader = csv.reader(csvfile, delimiter=',')
 	for row in filereader:
-		Y.append(map(float,row))
+		Y.append(map(float,row[3:6]))
 
 # делаем из питоновского массива нумпаевский массив
 Y = np.array(Y)

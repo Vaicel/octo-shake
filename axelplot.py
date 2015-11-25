@@ -1,21 +1,35 @@
 #!/usr/bin/env python2
+# -*- coding: utf-8 -*-
 
+# подключение модулей
 import numpy as np 
 import matplotlib.pyplot as plt 
 import csv
 
-
+# массив для хранения данных
 Y = []
 
-filename = "DATALOG.TXT"
+# файл из которого читаются данные
+filename = 'data.csv'
 
-for line in open(filename):
-	line = line.split(',')
-	Y.append(map(float,line))
+# чтение файла построчно, разделение строк на float значения из столбцов 3, 4, 5
+with open(filename, 'rb') as csvfile:
+	filereader = csv.reader(csvfile, delimiter=',')
+	for row in filereader:
+		Y.append(map(float,row[3:6]))
 
+# преобразование python массива в numpy массив
 Y = np.array(Y)
-x = np.arange(len(Y))
-#print x
-#print Y[:,range(3,6)]
-plt.plot(x,Y[:,range(3,6)]) # this is for plotting second column
-plt.show()
+
+# генерация натурального ряда для оси Х графиков
+x = np.arange(1000)
+
+# построение графиков ускорений по трем осям для части массива
+plt.plot(x,Y[9000:10000,0])
+plt.plot([0, 1000], [0.98, 0.98], color='g', linestyle='-', linewidth=2)
+plt.plot([0, 1000], [0.9, 0.9], color='y', linestyle='-', linewidth=2)
+plt.plot([0, 1000], [0.0, 0.0], color='r', linestyle='-', linewidth=2)
+#сохранение графика в файл
+plt.savefig('axel1-lines.png')
+# отображение графика 
+#plt.show()

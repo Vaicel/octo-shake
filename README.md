@@ -10,6 +10,9 @@ My awesome npk project
 + *data.csv* - то же самое, что и предыдущее
 + *axelplot.py* - строит график ускорений по трем осям
 + *openmap.py* - отрывает браузер с заданной http-ссылкой
++ "map.csv" - файл с точками на карте
++ "mapgen-example.py" - пример генерации карты
++ "mapgen-final.py" - генерация карты для проекта
 + *stino.settings* - ???
 
 Запуск скриптов

@@ -84,7 +84,7 @@ void loop()
         dataFile.print(",");
         dataFile.print(StringMass[COUNT_OF_LONGITUDE]); 
         dataFile.print(",");
-        dataFile.print(S21tringMass[COUNT_OF_LATITUDE]);
+        dataFile.print(StringMass[COUNT_OF_LATITUDE]);
         dataFile.print(",");
         dataFile.print(ax);
         dataFile.print(",");
